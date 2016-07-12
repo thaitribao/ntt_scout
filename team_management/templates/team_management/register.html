@@ -1,0 +1,30 @@
+{% extends 'team_management/base.html' %}
+{% load staticfiles %}
+{% block title %}Member Registration{% endblock %}
+{% block header_block %}Đăng kí{% endblock %}
+{% block sub_header_block %}{% endblock %}
+{% block body_block %}
+	{% if registered %}
+	<p> Thank you for registering! </p>
+	<a href="{% url 'index_page' %}">Return to Homepage </a>
+	{% else %}
+	<form id = "user_form" method="post" action="{% url 'register' %}" enctype="multipart/form-data">
+		{% csrf_token %}
+		{% for field in user_form.visible_fields %}
+		<p>
+			{{ field.errors }}
+			{{ field.help_text}}
+			{{ field }}
+		</p>
+		{% endfor %}
+		{% for field in member_form.visible_fields %}
+		<p>
+			{{ field.errors }}
+			{{ field.help_text }}
+			{{ field }}
+		</p>
+		{% endfor %}
+		<input type="submit" name="submit" value="Đăng ký"/>
+	</form>
+	{% endif %}
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'team_management/base.html' %}
+{% load staticfiles %}
+{% block title %} {{ team.team_name }} {% endblock %}
+{% block header_block %}Danh sách Đoàn{% endblock %}
+{% block sub_header_block %}{% endblock %}
+{% block body_block %}
+		<div class="panel panel-default">
+			{% if members %}
+			<table class="table">
+				<tr>
+					<th>Name</th>
+					<th>Team</th>
+					<th>Birthday</th>
+					<th>Profile</th>
+				</tr>
+				{% for member in members %}
+				<tr>
+					<td>{{ member.user.get_full_name }}</td>
+					<td>{{ member.team }}</td>
+					<td>{{ member.birthday }}</td>
+					<td><a href="{% url 'member' member.id %}">View Profile</a></td>
+				</tr>
+				{% endfor %}
+			</table>
+			{% else %}
+				<strong> No member. </strong>
+			{% endif %}
+		</div>
+{% endblock %}

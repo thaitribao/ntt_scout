@@ -1,0 +1,18 @@
+{% extends 'scout_info/base.html' %}
+{% load staticfiles %}
+{% block title %}Edit category{% endblock %}
+{% block header_block %}{{category.name}}{% endblock %}
+{% block sub_header_block %}Sửa thông tin thể loại{% endblock %}
+{% block body_block %}
+	<form id="category_form" method="post" action="{% url 'Scout_Info:edit_category' category_slug=category.slug %}">
+		{% csrf_token %}
+		{% for field in form.visible_fields %}
+		<p>
+			{{ field.errors }}
+			{{ field.help_text}}
+			{{ field }}
+		</p>
+		{% endfor %}
+		<input type="submit" name="submit" value="Edit category"/>
+	</form>
+{% endblock %}

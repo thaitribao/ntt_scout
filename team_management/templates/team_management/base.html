@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+<html lang='en'>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content ="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+		<title>NTT - {% block title %} - Site {% endblock %}</title>
+	</head>
+
+	<body>
+		
+		<!--
+		<div>
+			<ul>
+				<li><a href="{% url 'index_page' %}">Homepage</a></li>
+				<li><a href="{% url 'Scout_Info:camp_index' %}">Camps</a></li>
+				<li><a href="{% url 'Scout_Info:document_index' %}">Documents</a></li>
+				<li><a href="{% url 'Scout_Info:item_index' %}">Inventory</a></li>
+				{% if user.is_authenticated %}
+				<li><a href="{% url 'logout' %}">Logout</a></li>
+				{% else %}
+				<li><a href="{% url 'login' %}">Login</a></li>
+				<li><a href="{% url 'register' %}">Register</a></li>
+				{% endif %}
+			</ul>
+		</div>
+		<hr/>
+		<div>
+			<ul>
+				<li><a href="https://drive.google.com/file/d/0B-3ZzrCaKEgwQjVOamFzUTZJNkk/view?usp=sharing">Khán Tân Sinh </a> </li>
+			</ul>
+		</div>
+		-->
+
+		<!-- New html -->
+		<nav class="navbar navbar-default">
+		  <div class="container-fluid">
+		   
+		    <!-- Brand and toggle get grouped for better mobile display --> 
+		    <div class="navbar-header">
+		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+		        <span class="sr-only">Toggle navigation</span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		      </button>
+		      <a class="navbar-brand" href="{% url 'index_page' %}">Trang chủ</a>
+		    </div>
+
+		    <!-- Collect the nav links, forms, and other content for toggling -->
+		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		      
+		      <ul class="nav navbar-nav">
+		      	<li class="dropdown">
+		      		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Danh sách<span class="caret"></span></a>
+		      		<ul class="dropdown-menu">
+		      			<li><a href="{% url 'member_index' %}">Danh sách Đoàn</a></li>
+		      			<li><a href="{% url 'index_page' %}">Danh sách Đội</a></li>
+		      		</ul>
+		        <li><a href="{% url 'Scout_Info:camp_index' %}">Trại</a></li>
+		        <li><a href="{% url 'Scout_Info:document_index' %}">Tài liệu</a></li>
+		        <li><a href="{% url 'Scout_Info:item_index' %}">Vật dụng</a></li>
+		      </ul>
+
+		      <ul class="nav navbar-nav navbar-right">
+		        <li class="dropdown">
+		        {% if user.is_authenticated %}
+		        	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{user.get_full_name}}<span class="caret"></span></a>
+		          	<ul class="dropdown-menu">
+		          		<li><a href="{% url 'member' member_id=user.member.id %}">Thông tin cá nhân</a></li>
+		            	<li><a href="{% url 'logout' %}">Logout</a></li>
+		         	 </ul>
+		        {% else %}
+		        	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+			          <ul class="dropdown-menu">
+			            <li><a href="{% url 'login' %}">Login</a></li>
+			            <li role="separator" class="divider"></li>
+			            <li><a href="{% url 'register' %">Đăng kí</a></li>
+			          </ul>
+		        {% endif %}
+		        </li>
+		      </ul>
+		    
+		    </div><!-- /.navbar-collapse -->
+		  </div><!-- /.container-fluid -->
+		</nav>
+		<div class = "page-header">
+			<h1>{% block header_block %}{% endblock %} <small>{% block sub_header_block %}{% endblock %}</small></h1>
+		</div>
+		<div>
+			{% block body_block %}{% endblock %}
+		</div>
+	<!--jQuery for Bootstrap plugins -->
+	<script src="https://code.jquery.com/jquery.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	</body>
+</html>

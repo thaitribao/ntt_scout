@@ -1,0 +1,36 @@
+{% extends 'team_management/base.html' %}
+{% load staticfiles %}
+{% block title %}{{team.name}}-Add Member {% endblock %}
+{% block header_block %}Thông tin Đội {{team.name}}{% endblock %}
+{% block sub_header_block %}Thêm thành viên{% endblock %}
+{% block body_block %}
+	<h2>Team size: {{ team_size }}/8</h2>
+	{% if team_size < 8 %}
+		{% if eligible_members %}
+			<h2> Choose an eligible member </h2>
+			<table>
+				<tr>
+					<th>Name</th>
+					<th>Current Team</th>
+					<th>Birthday</th>
+					<th>Grade</th>
+					<th>Action</th>
+				</tr>
+				{% for mem in eligible_members %}
+				<tr>
+					<td>{{ mem.user.get_full_name }}</td>
+					<td>{{ mem.team }}</td>
+					<td>{{ mem.birthday }}</td>
+					<td>{{ mem.current_grade }}</td>
+					<td><a href="{% url 'team_add_member' team_slug=team.slug  member_id=mem.id %}">Add</a>
+				</tr>
+				{% endfor %}
+			</table>
+		{% else %}
+			<p> There is no eligible member for this team </p>
+		{% endif %}
+	{% else %}
+		<p> This team already has 8 members </p>
+	{% endif %}
+	<a href="{% url 'team' team_slug=team.slug %}">Back to Team Page </a>
+{% endblock %}

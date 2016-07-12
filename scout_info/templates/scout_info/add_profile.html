@@ -1,0 +1,18 @@
+{% extends 'scout_info/base.html' %}
+{% load staticfiles %}
+{% block title %}Add Scout Profile - {{ member.user.get_full_name }} {% endblock %}
+{% block header_block %}Tạo thông tin Hướng Đạo{% endblock %}
+{% block sub_header_block %}{{member.user.get_full_name}}{% endblock %}
+{% block body_block %}
+	<form id="profile_form" method="post" action="{% url 'Scout_Info:add_profile' member_id=member.id %}">
+		{% csrf_token %}
+		{% for field in form.visible_fields %}
+		<p>
+			{{ field.errors }}
+			{{ field.help_text}}
+			{{ field }}
+		</p>
+		{% endfor %}
+		<input type="submit" name="submit" value="Add profile"/>
+	</form>
+{% endblock %}

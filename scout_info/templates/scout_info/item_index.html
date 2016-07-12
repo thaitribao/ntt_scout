@@ -1,0 +1,33 @@
+{% extends 'scout_info/base.html' %}
+{% load staticfiles %}
+{% block title %}Category{% endblock %}
+{% block header_block %}Danh sách vật dụng{% endblock %}
+{% block sub_header_block %}{% endblock %}
+{% block body_block %}
+	<div class="panel panel-default">
+		<div class="panel-heading"><a href="{% url 'Scout_Info:add_item' %}">Thêm vật dụng</a></div>
+		<table class="table">
+			<tr>
+				<th>Name</th>
+				<th>Quantity</th>
+				<th>Keeper</th>
+				<th>Note</th>
+				<th>Last update</th>
+			</tr>
+		{% if items %}
+			{% for item in items %}
+				<tr>
+					<td>{{item.name}}</td>
+					<td>{{item.quantity}}</td>
+					<td>{{item.keeper}}</td>
+					<td>{{item.note}}</td>
+					<td>{{item.last_update}}</td>
+					<td><a href="{% url 'Scout_Info:edit_item' item_slug=item.slug %}">Sửa thông tin</a></td>
+				</tr>
+			{% endfor %}
+		</table>
+	{% else %}
+		No categories existed
+	{% endif %}
+	</div>
+{% endblock %}

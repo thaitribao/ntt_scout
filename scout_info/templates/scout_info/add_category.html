@@ -1,0 +1,18 @@
+{% extends 'scout_info/base.html' %}
+{% load staticfiles %}
+{% block title %}Add a new category{% endblock %}
+{% block header_block %}Tài liệu{% endblock %}
+{% block sub_header_block %}Tạo thể loại mới{% endblock %}
+{% block body_block %}
+	<form id="category_form" method="post" action="{% url 'Scout_Info:add_category' %}">
+		{% csrf_token %}
+		{% for field in form.visible_fields %}
+		<p>
+			{{ field.errors }}
+			{{ field.help_text}}
+			{{ field }}
+		</p>
+		{% endfor %}
+		<input type="submit" name="submit" value="Add category"/>
+	</form>
+{% endblock %}

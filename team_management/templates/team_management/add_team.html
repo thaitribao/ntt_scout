@@ -1,0 +1,18 @@
+{% extends 'team_management/base.html' %}
+{% load staticfiles %}
+{% block title %}Add a new team{% endblock %}
+{% block header_block %}Danh sách{% endblock %}
+{% block sub_header_block %}Tạo Đội mới{% endblock %}
+{% block body_block %}
+	<form id="team_form" method="post" action="{% url 'add_team' %}">
+		{% csrf_token %}
+		{% for field in form.visible_fields %}
+		<p>
+			{{ field.errors }}
+			{{ field.help_text}}
+			{{ field }}
+		</p>
+		{% endfor %}
+		<input type="submit" name="submit" value="Add team"/>
+	</form>
+{% endblock %}

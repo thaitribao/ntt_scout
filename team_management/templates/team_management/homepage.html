@@ -1,0 +1,9 @@
+{% extends 'team_management/base.html' %}
+{% load staticfiles %}
+{% block title %}Homepage{% endblock %}
+{% block header_block %}Trang chủ{% endblock %}
+{% block sub_header_block %}{% endblock %}
+{% block body_block %}
+<a class="btn btn-default" href="{% url 'login' %}" role="button">Đăng nhập</a>
+<a class="btn btn-default" href="{% url 'register' %}" role="button">Đăng kí</a>
+{% endblock %}

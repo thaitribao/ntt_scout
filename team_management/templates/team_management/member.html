@@ -1,0 +1,56 @@
+{% extends 'team_management/base.html' %}
+{% load staticfiles %}
+{% block title %} {{ member_name }} {% endblock %}
+{% block header_block %}Thông tin thành viên {{member_name}}{% endblock %}
+{% block sub_header_block %}{% endblock %}
+{% block body_block %}
+	{% if member %}
+	<div class="panel panel-default">
+	<div class="panel-heading"><a href="{% url 'edit_member' member_id=member.id %}">Sửa thông tin</a></div>
+	<div class="panel-body">
+	<h2> Đội: {{ member.team }} </h2>
+	<h5> Ngày gia nhập: {{ member.join_date }} </h5>
+	{% if profile %}
+		<p> Scout Profile: <a href="{% url 'Scout_Info:profile' member_id=member.id %}">Here</a></p>
+	{% else %}
+		<p> No profile created yet. Create profile <a href="{% url 'Scout_Info:add_profile' member_id=member.id %}">here</a></p>
+	{% endif %}
+	<p> Birthday: {{ member.birthday }} </p>
+	<p> Facebook: {{ member.facebook }} </p>
+	<p> Address: {{ member.address }} </p>
+	<p> Dad name: {{ member.dad_name }} </p>
+	<p> Dad phone: {{ member.dad_phone }} </p>
+	<p> Mom name: {{ member.mom_name }} </p>
+	<p> Mom phone: {{ member.mom_phone }} </p>
+	<p> Home phone: {{ member.home_phone }} </p>
+	<p> Current grade: {{ member.current_grade }} </p>
+	<p> Current school: {{ member.current_school }} </p>
+	<p> Health Info: {{ member.health_info }} </p>
+	{% if comments %}
+	<p> Comments: </p>
+	<div class="panel panel-default">
+		<div class="panel-heading"><a href="{% url 'add_comment' member_id=member_id %}">Add a Comment </a></div>
+		<table class="table">
+			<tr>
+				<th>Author</th>
+				<th>Comment</th>
+				<th>Date</th>
+			</tr>
+			{% for comment in comments %}
+			<tr>
+				<td>{{ comment.author }}</td>
+				<td>{{ comment.comment }}</td>
+				<td>{{ comment.date }}</td>
+			</tr>
+			{% endfor %}
+		</table>
+	</div>
+	{% else %}
+	<p> There is no comment for this member </p>
+	{% endif %}
+	</div>
+	</div>
+	{% else %}
+	<p> There is no such member </p>
+	{% endif %} 
+{% endblock %}

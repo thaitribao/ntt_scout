@@ -1,0 +1,27 @@
+{% extends 'team_management/base.html' %}
+{% load staticfiles %}
+{% block title %} Index {% endblock %}
+{% block header_block %}Chào bạn tới Web đoàn Nguyễn Trung Trực{% endblock %}
+{% block sub_header_block %}{% endblock %}
+{% block body_block %}
+	<div class="panel panel-default">
+		<div class="panel-heading"><a href="{% url 'add_team' %}">Tạo Đội mới</a></div>
+		{% if team_list %}
+			<table class="table">
+				<tr>
+					<th>Tên đội</th>
+					<th>Tiếng kêu</th>
+				</tr>
+				{% for team in team_list %}
+				<tr>
+					<td><a href="{% url 'team' team.slug %}">{{ team.team_name }}</a></td>
+					<td>{{team.slogan}}</td>
+					<td><a href="{% url 'edit_team' team.slug %}">Sửa thông tin</a></td>
+				</tr>
+				{% endfor %}
+			</table>
+		{% else %}
+			<strong>There are no team present. </strong>
+		{% endif %}
+	</div>
+{% endblock %}

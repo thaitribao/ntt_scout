@@ -1,0 +1,18 @@
+{% extends 'scout_info/base.html' %}
+{% load staticfiles %}
+{% block title %}Add a new camp{% endblock %}
+{% block header_block %}Trại{% endblock %}
+{% block sub_header_block %}Thêm kì trại{% endblock %}
+{% block body_block %}
+	<form id="camp_form" method="post" action="{% url 'Scout_Info:add_camp' %}">
+		{% csrf_token %}
+		{% for field in form.visible_fields %}
+		<p>
+			{{ field.errors }}
+			{{ field.help_text}}
+			{{ field }}
+		</p>
+		{% endfor %}
+		<input type="submit" name="submit" value="Add camp"/>
+	</form>
+{% endblock %}

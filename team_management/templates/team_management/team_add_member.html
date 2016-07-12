@@ -1,0 +1,9 @@
+{% extends 'team_management/base.html' %}
+{% load staticfiles %}
+{% block title %}{{ team.name }}-Add-{{ member.user.get_full_name }}{% endblock %}
+{% block header_block %}Thông tin Đội {{team.name}}{% endblock %}
+{% block sub_header_block %}{% endblock %}
+{% block body_block %}
+	<p> {{ member.user.get_full_name }} has been added to {{ team.team_name }}'s roster </p>
+	<a href="{% url 'team' team_slug=team_slug %}">Back to Team page</a>
+{% endblock %}

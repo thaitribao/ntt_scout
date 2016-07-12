@@ -1,0 +1,32 @@
+{% extends 'scout_info/base.html' %}
+{% load staticfiles %}
+{% block title %}Camp Info - {{camp.name}}{% endblock %}
+{% block header_block %}Trại{% endblock %}
+{% block sub_header_block %}{{camp.name}}{% endblock %}
+{% block body_block %}
+<div class="panel panel-default">
+	<div class="panel-heading"><a href="{% url 'Scout_Info:edit_camp' camp_name_slug=camp.slug %}">Sửa thông tin </a></div>
+	<table class="table">
+	<tr>
+		<th>Địa điểm</th> <th>{{camp.location}}</th>
+	</tr>
+	<tr><td>Bắt đầu</td> <td>{{camp.start_date}}</td></tr>
+	<tr><td>Kết thúc</td> <td>{{camp.end_date}}</td></tr>
+	<tr><td>Nhận xét</td> <td>{{camp.comment}}</td></tr>
+	<tr><td>Giấy trại</td> <td><a href= "{{camp.giay_trai}}">Here</a></td></tr>
+	</table>
+
+	<table class="table table-striped">
+	<tr>
+		<th>Trại sinh</th>
+	</tr>
+	{% if campers %}
+			{% for camper in campers %}
+				<tr><td><a href="{% url 'Scout_Info:profile' member_id=camper.id %}">{{ camper.user.get_full_name}}</a></td></tr>
+			{% endfor %}
+	{% else %}
+		<tr><td>No camper existed in this camp</td></tr>
+	{% endif %}
+	</table>
+	</div>
+{% endblock %}

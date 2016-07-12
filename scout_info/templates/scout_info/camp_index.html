@@ -1,0 +1,17 @@
+{% extends 'scout_info/base.html' %}
+{% load staticfiles %}
+{% block title %}Camps{% endblock %}
+{% block header_block %}Trại{% endblock %}
+{% block sub_header_block %}Tất cả các kì trại{% endblock %}
+{% block body_block %}
+	{% if camps %}
+		<ul>
+			{% for camp in camps %}
+				<li><a href="{% url 'Scout_Info:camp' camp_name_slug=camp.slug %}">{{camp.name}}</a></li>
+			{% endfor %}
+		</ul>
+	{% else %}
+		No camp existed
+	{% endif %}
+	<p><a href="{% url 'Scout_Info:add_camp' %}">Add a camp</a></p>
+{% endblock %}

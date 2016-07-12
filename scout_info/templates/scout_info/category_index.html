@@ -1,0 +1,22 @@
+{% extends 'scout_info/base.html' %}
+{% load staticfiles %}
+{% block title %}Category{% endblock %}
+{% block header_block %}Tài liệu{% endblock %}
+{% block sub_header_block %}Tất cả thể loại{% endblock %}
+{% block body_block %}
+	<div class="panel panel-default">
+	<div class="panel-heading">
+		<p><a href="{% url 'Scout_Info:add_category' %}">Thêm thể loại</a></p>
+		<p><a href="{% url 'Scout_Info:document_index' %}">Xem tất cả tài liệu</a></p>
+	</div>
+	{% if categories %}
+		<table class="table">
+			{% for category in categories %}
+				<tr><td><a href="{% url 'Scout_Info:category' category_slug=category.slug %}">{{category.name}}</a></td> <td><a href="{% url 'Scout_Info:edit_category' category_slug=category.slug %}">Sửa thể loại</a></td></tr>
+			{% endfor %}
+		</table>
+	{% else %}
+		No documents existed in this category
+	{% endif %}
+	</div>
+{% endblock %}
