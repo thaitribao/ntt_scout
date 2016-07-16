@@ -8,7 +8,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 class Team(models.Model):
-    team_name = models.CharField(max_length=20, default="")
+    team_name = models.CharField(max_length=20, default="", unique=True)
     slogan = models.CharField(max_length=20, default="")
     slug = models.SlugField(default="")
     max_capacity = 8
@@ -25,20 +25,20 @@ class Member(models.Model):
     user = models.OneToOneField(User) #one profile correspond to one user
     #picture = models.ImageField(upload_to='profile_images', blank = True) #optional profile pics
     birthday = models.DateField(default=timezone.now()) #birthday
-    team = models.ForeignKey(Team, null=True)
+    team = models.ForeignKey(Team, null=True, blank= True)
     join_date = models.DateField(default=timezone.now())
     #contact info
     address = models.CharField(max_length=500, default="", null=True)
-    facebook = models.CharField(max_length=30, default="", null=True)
-    dad_name = models.CharField(max_length=40, default="", null=True)
+    facebook = models.CharField(max_length=30, default="", null=True, blank=True)
+    dad_name = models.CharField(max_length=40, default="", null=True, blank=True)
     dad_phone = models.PositiveIntegerField(default=0, null=True)
-    mom_name = models.CharField(max_length=40, default="", null=True)
+    mom_name = models.CharField(max_length=40, default="", null=True, blank=True)
     mom_phone = models.PositiveIntegerField(default=0, null=True)
     home_phone = models.PositiveIntegerField(default=0, null=True)
     #school info
     current_grade = models.PositiveIntegerField(default=6, validators=[MaxValueValidator(13), MinValueValidator(1)])
-    current_school = models.CharField(max_length=50, default="", null=True)
-    health_info = models.TextField(max_length=1000, default="", null=True)
+    current_school = models.CharField(max_length=50, default="", null=True, blank=True)
+    health_info = models.TextField(max_length=1000, default="", null=True, blank=True)
 
     def __str__(self):
         return self.user.get_full_name()

@@ -27,16 +27,16 @@ class UserForm(forms.ModelForm):
 class MemberForm(forms.ModelForm):
 	birthday = forms.DateField(widget=SelectDateWidget(years=range(timezone.now().year-30,timezone.now().year)), initial=timezone.now().date(), help_text="DD/MM/YYYY.")
 	join_date = forms.DateField(widget=SelectDateWidget(years=range(timezone.now().year-20, timezone.now().year)), initial=timezone.now().date(), help_text="Ngay nhap doan.")
-	address = forms.CharField(max_length=500, help_text="Địa chỉ: ")
-	facebook = forms.CharField(max_length=30, help_text="Facebook: ")
-	dad_name = forms.CharField(max_length=40, help_text="Tên cha: ")
+	address = forms.CharField(max_length=500, help_text="Địa chỉ: ", required=False)
+	facebook = forms.CharField(max_length=30, help_text="Facebook: ", required=False)
+	dad_name = forms.CharField(max_length=40, help_text="Tên cha: ", required=False)
 	dad_phone = forms.IntegerField(initial=0, help_text="Số điện thoại cha: ") 
-	mom_name = forms.CharField(max_length=40, help_text="Tên mẹ: ")
+	mom_name = forms.CharField(max_length=40, help_text="Tên mẹ: ", required=False)
 	mom_phone = forms.IntegerField(initial=0, help_text="Số điện thoại mẹ: ")
 	home_phone = forms.IntegerField(initial=0, help_text="Số điện thoại nhà: ")
-	current_grade = forms.IntegerField(initial=1, help_text="Lớp: ")
-	current_school = forms.CharField(max_length=50, help_text="Trường: ")
-	health_info = forms.CharField(max_length=1000, help_text="Tình trạng sức khỏe: ")
+	current_grade = forms.IntegerField(initial=1, help_text="Lớp (ĐH = 13): ")
+	current_school = forms.CharField(max_length=50, help_text="Trường: ", required=False)
+	health_info = forms.CharField(max_length=1000, help_text="Tình trạng sức khỏe: ", required=False)
 
 	class Meta:
 		model = Member

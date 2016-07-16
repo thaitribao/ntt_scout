@@ -12,8 +12,8 @@ class CampForm(forms.ModelForm):
 	location = forms.CharField(max_length=30, help_text="Địa điểm: ")
 	start_date = forms.DateField(widget=SelectDateWidget(years=range(timezone.now().year-10,timezone.now().year+1)), initial=timezone.now().date(), help_text="Ngày khởi hành")
 	end_date = forms.DateField(widget=SelectDateWidget(years=range(timezone.now().year-10,timezone.now().year+1)), initial=timezone.now().date(), help_text="Ngày kết thúc")
-	members = forms.ModelMultipleChoiceField(queryset=Member.objects.all(), help_text="Danh sách người tham gia")
-	giay_trai = forms.URLField(max_length=300, help_text="Link Google Drive cho giấy trại")
+	members = forms.ModelMultipleChoiceField(queryset=Member.objects.all(), help_text="Danh sách người tham gia", required = False)
+	giay_trai = forms.URLField(max_length=300, help_text="Link Google Drive cho giấy trại", required=False)
 	comment = forms.CharField(widget=forms.Textarea, help_text="Nhận xét về kì trại")
 	class Meta:
 		model = Camp
@@ -39,8 +39,8 @@ class Scout_ProfileForm(forms.ModelForm):
 	tan_sinh = forms.BooleanField(help_text="Đã Tuyên hứa")
 	hang_nhi = forms.BooleanField(help_text="Đã được trao Hạng Nhì")
 	position = forms.ChoiceField(help_text="Chức vụ",choices=POSITION_CHOICES,widget=forms.RadioSelect())
-	khan_tan_sinh = forms.URLField(help_text="Link Google Drive cho chương trình Tân Sinh")
-	khan_hang_nhi = forms.URLField(help_text="Link Google Drive cho chương trình Hạng Nhì")
+	khan_tan_sinh = forms.URLField(help_text="Link Google Drive cho chương trình Tân Sinh", required=  False)
+	khan_hang_nhi = forms.URLField(help_text="Link Google Drive cho chương trình Hạng Nhì", required = False)
 	class Meta:
 		model = Scout_Profile
 		fields = ('khan_quang','tan_sinh','hang_nhi','position','khan_tan_sinh','khan_hang_nhi')
@@ -56,7 +56,7 @@ class CategoryForm(forms.ModelForm):
 
 class DocumentForm(forms.ModelForm):
 	name = forms.CharField(max_length=30, help_text="Tên tài liệu: ")
-	category = forms.ModelChoiceField(queryset=Category.objects.all(), help_text="Thể loại: ")
+	category = forms.ModelChoiceField(queryset=Category.objects.all(), help_text="Thể loại: ", required = False)
 	link = forms.URLField(help_text="Link Google Drive cho tài liệu: ")
 
 	class Meta:

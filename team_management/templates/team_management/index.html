@@ -17,6 +17,7 @@
 					<td><a href="{% url 'team' team.slug %}">{{ team.team_name }}</a></td>
 					<td>{{team.slogan}}</td>
 					<td><a href="{% url 'edit_team' team.slug %}">Sửa thông tin</a></td>
+					<td><a href="{% url 'team_delete_confirmation' team_slug=team.slug %}">Xóa Đội</a></td>
 				</tr>
 				{% endfor %}
 			</table>

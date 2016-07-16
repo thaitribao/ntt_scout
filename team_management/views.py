@@ -193,3 +193,16 @@ def edit_member(request,member_id):
 	else:
 		form = MemberForm(instance=member)
 	return render(request, 'team_management/edit_member.html',{'form':form,'member':member,})
+
+def delete_team(request,team_slug):
+	team = get_object_or_404(Team, slug=team_slug)
+	members = Member.objects.filter(team=team)
+	for member in members:
+		member.team = None
+		member.save()
+	team.delete()
+	return redirect('index_page')
+
+def team_delete_confirmation(request, team_slug):
+	team = get_object_or_404(Team, slug=team_slug)
+	return render(request,'team_management/team_delete_confirmation.html',{'team':team,})

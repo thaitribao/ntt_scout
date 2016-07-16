@@ -1,0 +1,15 @@
+{% extends 'scout_info/base.html' %}
+{% load staticfiles %}
+{% block title %}Category Delete Confirmation{% endblock %}
+{% block header_block %}Xóa Thể loại{% endblock %}
+{% block sub_header_block %}{{category.name}}{% endblock %}
+{% block body_block %}
+	<div class="panel panel-default">
+		<div class="panel-heading">Bạn có đồng ý xóa thể loại {{category.name}} ?</div>
+		<p>Các tài liệu trong Thể loại hiện tại sẽ không có Thể loại </p>
+		<div class="btn-group" role="group" aria-label="Basic example">
+  			<a class="btn btn-primary" href="{% url 'Scout_Info:delete_category' category_slug=category.slug %}" role="button">Yes</a>
+  			<a class="btn btn-primary" href="{% url 'Scout_Info:category_index' %}" role="button">No</a>
+  		</div>
+	</div>
+{% endblock %}

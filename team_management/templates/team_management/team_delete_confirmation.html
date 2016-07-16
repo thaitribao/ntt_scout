@@ -1,0 +1,15 @@
+{% extends 'team_management/base.html' %}
+{% load staticfiles %}
+{% block title %}Team Delete Confirmation{% endblock %}
+{% block header_block %}Xóa Đội{% endblock %}
+{% block sub_header_block %}{{team.team_name}}{% endblock %}
+{% block body_block %}
+	<div class="panel panel-default">
+		<div class="panel-heading">Bạn có đồng ý xóa đội {{team.team_name}} ?</div>
+		<p>Các thành viên trong Đội hiện tại sẽ không có Đội </p>
+		<div class="btn-group" role="group" aria-label="Basic example">
+  			<a class="btn btn-primary" href="{% url 'delete_team' team_slug=team.slug %}" role="button">Yes</a>
+  			<a class="btn btn-primary" href="{% url 'index_page' %}" role="button">No</a>
+  		</div>
+	</div>
+{% endblock %}

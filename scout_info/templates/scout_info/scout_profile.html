@@ -4,19 +4,35 @@
 {% block header_block %}Thông tin Hướng Đạo{% endblock %}
 {% block sub_header_block %}{{member.user.get_full_name}}{% endblock %}
 {% block body_block %}
+	<div class="panel panel-default">
+	<div class="panel-heading"><a href="{% url 'Scout_Info:edit_profile' member_id=member.id %}">Sửa thông tin</a></div>
 	<ul>
 		<li>Khăn quàng: {{ profile.khan_quang }} </li>
 		<li>Tân Sinh: {{ profile.tan_sinh }} </li>
 		<li>Hạng Nhì: {{ profile.hang_nhi }} </li>
 	</ul>
-	<p> Chức vụ: {{ profile.position }} </p>
+	<p> Chức vụ: 
+		{% if profile.position == 'STL' %}
+			Liên đoàn Trưởng
+		{% elif profile.position == 'SPL' %}
+			Đội trưởng Nhất
+		{% elif profile.position == 'ASPL' %}
+			Phụ tá Đội trưởng Nhất
+		{% elif profile.position == 'ATL' %}
+			Phụ tá/Thiếu phó
+		{% elif profile.position == 'PL' %}
+			Thiếu trưởng
+		{% else %}
+			Không có
+		{% endif %}
+	</p>
 	<ul>
 		Chương trình khán:
 		<li><a href="{{profile.khan_tan_sinh}}">Khán Tân Sinh</a></li>
 		<li><a href="{{profile.khan_hang_nhi}}">Khán Hạng Nhì</a></li>
 	</ul>
 	{% if camps %}
-	<p> Các trại đã tham gia: 
+	<p> Các trại đã tham gia: </p>
 		<ul>
 			{% for camp in camps %}
 				<li><a href="{% url 'Scout_Info:camp' camp_name_slug=camp.slug %}">{{camp.name}}</a></li>
@@ -25,4 +41,5 @@
 	{% else %}
 		Never participated in camps
 	{% endif %}
+	</div>
 {% endblock %}

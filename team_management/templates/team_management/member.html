@@ -26,10 +26,10 @@
 	<p> Current grade: {{ member.current_grade }} </p>
 	<p> Current school: {{ member.current_school }} </p>
 	<p> Health Info: {{ member.health_info }} </p>
-	{% if comments %}
 	<p> Comments: </p>
 	<div class="panel panel-default">
 		<div class="panel-heading"><a href="{% url 'add_comment' member_id=member_id %}">Add a Comment </a></div>
+	{% if comments %}
 		<table class="table">
 			<tr>
 				<th>Author</th>
@@ -38,16 +38,16 @@
 			</tr>
 			{% for comment in comments %}
 			<tr>
-				<td>{{ comment.author }}</td>
+				<td>{{ comment.author.get_full_name }}</td>
 				<td>{{ comment.comment }}</td>
 				<td>{{ comment.date }}</td>
 			</tr>
 			{% endfor %}
 		</table>
-	</div>
 	{% else %}
 	<p> There is no comment for this member </p>
 	{% endif %}
+	</div>
 	</div>
 	</div>
 	{% else %}

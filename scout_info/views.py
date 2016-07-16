@@ -210,3 +210,29 @@ def edit_profile(request, member_id):
 	else:	
 		form = Scout_ProfileForm(instance=profile)
 	return render(request, 'scout_info/edit_profile.html',{'form':form,'profile':profile,'member':member,})
+
+@login_required
+def delete_category(request,category_slug):
+	category = get_object_or_404(Category, slug=category_slug)
+	documents = Document.objects.filter(category=category)
+	for document in documents:
+		document.category = None
+		document.save()
+	category.delete()
+	return redirect('Scout_Info:category_index')
+
+@login_required
+def category_delete_confirmation(request, category_slug):
+	category = get_object_or_404(Category, slug=category_slug)
+	return render(request,'scout_info/category_delete_confirmation.html',{'category':category,})
+
+@login_required
+def document_delete_confirmation(request, document_slug):
+	document = get_object_or_404(Document, slug=document_slug)
+	return render(request,'scout_info/document_delete_confirmation.html',{'document':document,})
+
+@login_required
+def delete_document(request, document_slug):
+	document = get_object_or_404(Document, slug=document_slug)
+	document.delete()
+	return redirect('Scout_Info:document_index')

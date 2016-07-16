@@ -13,7 +13,10 @@
 	{% if documents %}
 		<table class="table">
 			{% for doc in documents %}
-				<tr><td><a href="{{doc.link}}">{{doc.name}}</a></td> <td><a href="{% url 'Scout_Info:edit_document' document_slug=doc.slug %}">Sửa tài liệu</a></td></tr>
+				<tr>
+					<td><a href="{{doc.link}}">{{doc.name}}</a></td> <td><a href="{% url 'Scout_Info:edit_document' document_slug=doc.slug %}">Sửa tài liệu</a></td>
+					<td><a href="{% url 'Scout_Info:document_delete_confirmation' document_slug=doc.slug %}">Xóa</a></td>
+				</tr>
 			{% endfor %}
 		</table>
 	{% else %}

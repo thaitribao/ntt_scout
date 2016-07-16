@@ -9,9 +9,11 @@
 		<form id="comment_form" method="post" action="{% url 'add_comment' member_id=member_id %}">
 		{% csrf_token %}
 		{% for field in form.visible_fields %}
+		<p>
 			{{ field.errors }}
 			{{ field.help_text }}
 			{{ field }}
+		</p>
 		{% endfor %}
 		<input type="submit" name="submit" value="Add Comment"/>
 		</form> 

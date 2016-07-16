@@ -19,6 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    url(r'^$','team_management.views.index'),
     url(r'^admin/', admin.site.urls),
     url(r'^manage/', include('team_management.urls')),
     url(r'^scout_info/',include('scout_info.urls',namespace='Scout_Info')),

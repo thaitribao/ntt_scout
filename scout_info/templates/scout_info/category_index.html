@@ -12,7 +12,11 @@
 	{% if categories %}
 		<table class="table">
 			{% for category in categories %}
-				<tr><td><a href="{% url 'Scout_Info:category' category_slug=category.slug %}">{{category.name}}</a></td> <td><a href="{% url 'Scout_Info:edit_category' category_slug=category.slug %}">Sửa thể loại</a></td></tr>
+				<tr>
+					<td><a href="{% url 'Scout_Info:category' category_slug=category.slug %}">{{category.name}}</a></td> 
+					<td><a href="{% url 'Scout_Info:edit_category' category_slug=category.slug %}">Sửa thể loại</a></td>
+					<td><a href="{% url 'Scout_Info:category_delete_confirmation' category_slug=category.slug %}">Xóa thể loại</a></td>
+				</tr>
 			{% endfor %}
 		</table>
 	{% else %}
