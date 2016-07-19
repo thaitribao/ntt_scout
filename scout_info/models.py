@@ -11,6 +11,9 @@ class Scout_Profile(models.Model):
 	khan_quang = models.BooleanField(default=False)
 	tan_sinh = models.BooleanField(default=False)
 	hang_nhi = models.BooleanField(default=False)
+	khan_quang_date = models.DateField(default=timezone.now(), blank=True, null=True)
+	tan_sinh_date = models.DateField(default=timezone.now(), blank=True, null=True)
+	hang_nhi_date = models.DateField(default=timezone.now(), blank=True, null=True)
 	NONE = 'NON'
 	SENIOR_PATROL_LEADER = 'SPL' 
 	ASSISTANT_SENIOR_PATROL_LEADER = 'ASPL'

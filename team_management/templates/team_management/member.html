@@ -6,14 +6,20 @@
 {% block body_block %}
 	{% if member %}
 	<div class="panel panel-default">
+	{% if is_admin or is_self %}
 	<div class="panel-heading"><a href="{% url 'edit_member' member_id=member.id %}">Sửa thông tin</a></div>
+	{% endif %}
 	<div class="panel-body">
 	<h2> Đội: {{ member.team }} </h2>
 	<h5> Ngày gia nhập: {{ member.join_date }} </h5>
 	{% if profile %}
 		<p> Scout Profile: <a href="{% url 'Scout_Info:profile' member_id=member.id %}">Here</a></p>
 	{% else %}
+		{% if is_admin %}
 		<p> No profile created yet. Create profile <a href="{% url 'Scout_Info:add_profile' member_id=member.id %}">here</a></p>
+		{% else %}
+		<p> No profile created yet. </p>
+		{% endif %}
 	{% endif %}
 	<p> Birthday: {{ member.birthday }} </p>
 	<p> Facebook: {{ member.facebook }} </p>
@@ -28,7 +34,9 @@
 	<p> Health Info: {{ member.health_info }} </p>
 	<p> Comments: </p>
 	<div class="panel panel-default">
+		{% if is_admin %}
 		<div class="panel-heading"><a href="{% url 'add_comment' member_id=member_id %}">Add a Comment </a></div>
+		{% endif %}
 	{% if comments %}
 		<table class="table">
 			<tr>

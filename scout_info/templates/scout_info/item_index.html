@@ -5,7 +5,9 @@
 {% block sub_header_block %}{% endblock %}
 {% block body_block %}
 	<div class="panel panel-default">
+		{% if is_admin %}
 		<div class="panel-heading"><a href="{% url 'Scout_Info:add_item' %}">Thêm vật dụng</a></div>
+		{% endif %}
 		<table class="table">
 			<tr>
 				<th>Name</th>
@@ -22,7 +24,9 @@
 					<td>{{item.keeper}}</td>
 					<td>{{item.note}}</td>
 					<td>{{item.last_update}}</td>
+					{% if is_admin %}
 					<td><a href="{% url 'Scout_Info:edit_item' item_slug=item.slug %}">Sửa thông tin</a></td>
+					{% endif %}
 				</tr>
 			{% endfor %}
 		</table>

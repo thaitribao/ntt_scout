@@ -1,0 +1,32 @@
+{% extends 'team_management/base.html' %}
+{% load staticfiles %}
+{% block title %}Changelog{% endblock %}
+{% block header_block %}Changelog{% endblock %}
+{% block sub_header_block %}{% endblock %}
+{% block body_block %}
+	<div class="panel panel-default">
+		<div class="panel-heading">Change log to deployed site</div>
+		<table class="table">
+			<tr>
+				<th>Version</th>
+				<th>Changes</th>
+				<th>Date committed</th>
+			</tr>
+			<tr>
+				<td>1.0.0</td>
+				<td>First version. Includes: User,Member,Team,Item,Document,Category,Camp,ScoutProfile</td>
+				<td>July 12 2016</td>
+			</tr>
+			<tr>
+				<td>1.0.1</td>
+				<td>Adding editting options for Scout Profile, Category, Document. Edit "Grade" and "Position" for ease of use. Option to Delete Team and Category. Fix homepage link issue. Team name set to "unique".</td>
+				<td>July 15 2016</td>
+			</tr>
+			<tr>
+				<td>1.0.2</td>
+				<td>Add accessibility check using Team's is_admin attribute. Add changelog. Add Date of Oath, Neckerchief, Rankings. </td>
+				<td>July 19 2016 </td>
+			</tr>
+		</table>
+	</div>
+{% endblock %}

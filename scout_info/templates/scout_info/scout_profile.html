@@ -7,9 +7,21 @@
 	<div class="panel panel-default">
 	<div class="panel-heading"><a href="{% url 'Scout_Info:edit_profile' member_id=member.id %}">Sửa thông tin</a></div>
 	<ul>
-		<li>Khăn quàng: {{ profile.khan_quang }} </li>
-		<li>Tân Sinh: {{ profile.tan_sinh }} </li>
-		<li>Hạng Nhì: {{ profile.hang_nhi }} </li>
+		{% if profile.khan_quang %}
+		<li>Có khăn ngày: {{profile.khan_quang_date}}</li>
+		{% else %}
+		<li>Chưa có khăn quàng</li>
+		{% endif %}
+		{% if profile.tan_sinh %}
+		<li>Tuyên hứa ngày: {{profile.tan_sinh_date}}</li>
+		{% else %}
+		<li>Chưa có Tân sinh</li>
+		{% endif %}
+		{% if profile.hang_nhi %}
+		<li>Có hạng nhì ngày: {{profile.hang_nhi_date}}</li>
+		{% else %}
+		<li>Chưa có Hạng nhì</li>
+		{% endif %}
 	</ul>
 	<p> Chức vụ: 
 		{% if profile.position == 'STL' %}

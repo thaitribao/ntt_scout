@@ -5,7 +5,9 @@
 {% block sub_header_block %}{{camp.name}}{% endblock %}
 {% block body_block %}
 <div class="panel panel-default">
+	{% if is_admin %}
 	<div class="panel-heading"><a href="{% url 'Scout_Info:edit_camp' camp_name_slug=camp.slug %}">Sửa thông tin </a></div>
+	{% endif %}
 	<table class="table">
 	<tr>
 		<th>Địa điểm</th> <th>{{camp.location}}</th>
@@ -15,7 +17,8 @@
 	<tr><td>Nhận xét</td> <td>{{camp.comment}}</td></tr>
 	<tr><td>Giấy trại</td> <td><a href= "{{camp.giay_trai}}">Here</a></td></tr>
 	</table>
-
+</div>
+<div class="panel panel-default">
 	<table class="table table-striped">
 	<tr>
 		<th>Trại sinh</th>
@@ -28,5 +31,5 @@
 		<tr><td>No camper existed in this camp</td></tr>
 	{% endif %}
 	</table>
-	</div>
+</div>
 {% endblock %}

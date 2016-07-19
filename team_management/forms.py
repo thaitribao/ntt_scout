@@ -46,10 +46,11 @@ class MemberForm(forms.ModelForm):
 class TeamForm(forms.ModelForm):
 	team_name = forms.CharField(max_length=20, help_text="Tên đội: ")
 	slogan = forms.CharField(max_length=20, help_text="Tiếng kêu: ")
+	is_leaders = forms.BooleanField(help_text="Có quyền Admin: ")
 
 	class Meta:
 		model = Team
-		fields = ('team_name','slogan')
+		fields = ('team_name','slogan','is_leaders')
 
 
 

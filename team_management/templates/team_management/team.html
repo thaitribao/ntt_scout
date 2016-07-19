@@ -6,7 +6,9 @@
 {% block body_block %}
 	{% if team %}
 		<div class="panel panel-default">
+			{% if is_admin %}
 			<div class = "panel-heading"><a href= "{% url 'team_add_member_list' team_slug=team.slug %}">Add member</a></div>
+			{% endif %}
 			{% if members %}
 			<table class="table">
 				<tr>
@@ -19,7 +21,9 @@
 					<td>{{ member.user.get_full_name }}</td>
 					<td>{{ member.birthday }}</td>
 					<td><a href="{% url 'member' member.id %}">View Profile</a></td>
+					{% if is_admin %}
 					<td><a href="{% url 'remove_member' team_slug=team.slug member_id=member.id %}">Remove</a></td>
+					{% endif %}
 				</tr>
 				{% endfor %}
 			</table>

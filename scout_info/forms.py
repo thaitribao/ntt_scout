@@ -41,9 +41,13 @@ class Scout_ProfileForm(forms.ModelForm):
 	position = forms.ChoiceField(help_text="Chức vụ",choices=POSITION_CHOICES,widget=forms.RadioSelect())
 	khan_tan_sinh = forms.URLField(help_text="Link Google Drive cho chương trình Tân Sinh", required=  False)
 	khan_hang_nhi = forms.URLField(help_text="Link Google Drive cho chương trình Hạng Nhì", required = False)
+	khan_quang_date = forms.DateField(widget=SelectDateWidget(years=range(timezone.now().year-10,timezone.now().year+1)), initial=timezone.now().date(), help_text="Ngày trao khăn")
+	tan_sinh_date = forms.DateField(widget=SelectDateWidget(years=range(timezone.now().year-10,timezone.now().year+1)), initial=timezone.now().date(), help_text="Ngày Tuyên Hứa")
+	hang_nhi_date = forms.DateField(widget=SelectDateWidget(years=range(timezone.now().year-10,timezone.now().year+1)), initial=timezone.now().date(), help_text="Ngày Hạng Nhì")
+
 	class Meta:
 		model = Scout_Profile
-		fields = ('khan_quang','tan_sinh','hang_nhi','position','khan_tan_sinh','khan_hang_nhi')
+		fields = ('khan_quang','khan_quang_date','tan_sinh','tan_sinh_date','hang_nhi','hang_nhi_date','position','khan_tan_sinh','khan_hang_nhi')
 
 
 class CategoryForm(forms.ModelForm):

@@ -5,7 +5,9 @@
 {% block sub_header_block %}{% endblock %}
 {% block body_block %}
 	<div class="panel panel-default">
+		{% if is_admin %}
 		<div class="panel-heading"><a href="{% url 'add_team' %}">Tạo Đội mới</a></div>
+		{% endif %}
 		{% if team_list %}
 			<table class="table">
 				<tr>
@@ -16,8 +18,10 @@
 				<tr>
 					<td><a href="{% url 'team' team.slug %}">{{ team.team_name }}</a></td>
 					<td>{{team.slogan}}</td>
+					{% if is_admin %}
 					<td><a href="{% url 'edit_team' team.slug %}">Sửa thông tin</a></td>
 					<td><a href="{% url 'team_delete_confirmation' team_slug=team.slug %}">Xóa Đội</a></td>
+					{% endif %}
 				</tr>
 				{% endfor %}
 			</table>
