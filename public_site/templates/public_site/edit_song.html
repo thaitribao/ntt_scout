@@ -1,0 +1,18 @@
+{% extends 'public_site/base.html' %}
+{% load staticfiles %}
+{% block title %}Edit song{% endblock %}
+{% block header_block %}{{song.name}}{% endblock %}
+{% block sub_header_block %}Sửa bài hát{% endblock %}
+{% block body_block %}
+	<form id="song_form" method="post" action="{% url 'Public:edit_song' song_slug=song.slug %}">
+		{% csrf_token %}
+		{% for field in form.visible_fields %}
+		<p>
+			{{ field.errors }}
+			{{ field.help_text}}
+			{{ field }}
+		</p>
+		{% endfor %}
+		<input type="submit" name="submit" value="Sửa"/>
+	</form>
+{% endblock %}

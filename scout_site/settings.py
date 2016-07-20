@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'team_management',
     'scout_info',
+    'public_site',
 ]
 
 MIDDLEWARE_CLASSES = [

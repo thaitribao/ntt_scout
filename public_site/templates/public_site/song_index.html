@@ -1,0 +1,29 @@
+{% extends 'public_site/base.html' %}
+{% load staticfiles %}
+{% block title %}Songs{% endblock %}
+{% block header_block %}Bài hát{% endblock %}
+{% block sub_header_block %}{% endblock %}
+{% block body_block %}
+	<div class="panel panel-default">
+		{% if is_admin %}
+		<div class="panel-heading"><a href="{% url 'Public:add_song' %}">Thêm bài hát</a></div>
+		{% endif %}
+		{% if songs %}
+		<table class="table table-striped">
+			<tr>
+				<th>Tên bài hát</th>
+				<th>Link</th>
+			</tr>
+			{% for song in songs %}
+				<tr>
+					<td><a href="{% url 'Public:song' song_slug=song.slug %}">{{song.name}}</a></td>
+					<td>{{song.link}}</td>
+					<td><a href="{% url 'Public:edit_song' song_slug=song.slug %}">Sửa</a></td>
+				</tr>
+			{% endfor %}
+		</table>
+		{% else %}
+			No song existed
+		{% endif %}
+	</div>
+{% endblock %}

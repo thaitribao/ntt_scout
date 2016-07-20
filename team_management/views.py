@@ -13,7 +13,7 @@ from scout_info.models import Scout_Profile
 def index(request):
 	if request.user.is_authenticated():
 		is_admin = check_admin_right(request.user) 
-		team_list = Team.objects.all()
+		team_list = Team.objects.all().order_by('team_name',)
 		return render(request,'team_management/index.html',{'team_list':team_list,'is_admin':is_admin,})
 	else: 
 		return render(request,'team_management/homepage.html',{})
@@ -191,7 +191,7 @@ def remove_member(request, team_slug, member_id):
 
 @login_required
 def member_index(request):
-	members = Member.objects.all()
+	members = Member.objects.all().order_by('-team','birthday')
 	is_admin = check_admin_right(request.user)
 	return render(request,'team_management/member_index.html',{'members':members,'is_admin':is_admin,})
 
@@ -268,10 +268,13 @@ def change_log(request):
 
 #check if the user is in a team that allows administrative rights
 def check_admin_right(user):
-	member = Member.objects.get(user=user)
-	team = member.team
-	if team:
-		return team.is_leaders
-	else: 
+	if not user.is_authenticated:
 		return False
+	else:
+		member = Member.objects.get(user=user)
+		team = member.team
+		if team:
+			return team.is_leaders
+		else: 
+			return False
 

@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^manage/', include('team_management.urls')),
     url(r'^scout_info/',include('scout_info.urls',namespace='Scout_Info')),
+    url(r'^public/',include('public_site.urls',namespace='Public')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,18 @@
+{% extends 'public_site/base.html' %}
+{% load staticfiles %}
+{% block title %}Add a new song{% endblock %}
+{% block header_block %}Bài hát{% endblock %}
+{% block sub_header_block %}Thêm bài hát{% endblock %}
+{% block body_block %}
+	<form id="song_form" method="post" action="{% url 'Public:add_song' %}">
+		{% csrf_token %}
+		{% for field in form.visible_fields %}
+		<p>
+			{{ field.errors }}
+			{{ field.help_text}}
+			{{ field }}
+		</p>
+		{% endfor %}
+		<input type="submit" name="submit" value="Add song"/>
+	</form>
+{% endblock %}

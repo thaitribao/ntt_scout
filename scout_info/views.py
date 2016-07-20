@@ -50,7 +50,7 @@ def add_profile(request, member_id):
 @login_required
 def camp_index(request):
 	is_admin = check_admin_right(request.user)
-	camps = Camp.objects.all()
+	camps = Camp.objects.all().order_by('-start_date',)
 	return render(request, 'scout_info/camp_index.html',{'camps':camps,'is_admin':is_admin,})
 
 #Add a new camp to the DB
@@ -88,7 +88,7 @@ def camp(request, camp_name_slug):
 @login_required
 def document_index(request):
 	is_admin = check_admin_right(request.user)
-	documents = Document.objects.all()
+	documents = Document.objects.all().order_by('-category','name')
 	context_dict={'documents':documents,'is_admin':is_admin}
 	return render(request,'scout_info/document_index.html',context_dict)
 
@@ -96,7 +96,7 @@ def document_index(request):
 @login_required
 def category_index(request):
 	is_admin = check_admin_right(request.user)
-	categories = Category.objects.all()
+	categories = Category.objects.all().order_by('name',)
 	context_dict={'categories':categories,'is_admin':is_admin,}
 	return render(request,'scout_info/category_index.html',context_dict)
 
@@ -149,7 +149,7 @@ def add_document(request):
 @login_required
 def item_index(request):
 	is_admin = check_admin_right(request.user)
-	items = Item.objects.all()
+	items = Item.objects.all().order_by('name',)
 	return render(request,'scout_info/item_index.html',{'items':items,'is_admin':is_admin,})
 
 #Create a new inventory item (need url, html)

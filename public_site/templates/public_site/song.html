@@ -1,0 +1,14 @@
+{% extends 'public_site/base.html' %}
+{% load staticfiles %}
+{% block title %}Song - {{ song.name }} {% endblock %}
+{% block header_block %}Bài hát{% endblock %}
+{% block sub_header_block %}{{song.name}}{% endblock %}
+{% block body_block %}
+	<div class="panel panel-default">
+	<div class="panel-heading"><a href="{% url 'Public:edit_song' song_slug=song.slug %}">Sửa bài hát</a></div>
+	{% if song.link %}
+	<h5><a href="{{song.link}}">Video clip</a></h5>
+	{% endif %}
+	<p>{{ song.lyric|linebreaks }}</p>
+	</div>
+{% endblock %}

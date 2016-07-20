@@ -1,0 +1,18 @@
+{% extends 'public_site/base.html' %}
+{% load staticfiles %}
+{% block title %}Edit album{% endblock %}
+{% block header_block %}{{album.name}}{% endblock %}
+{% block sub_header_block %}Sửa album{% endblock %}
+{% block body_block %}
+	<form id="album_form" method="post" action="{% url 'Public:edit_album' album_slug=album.slug %}">
+		{% csrf_token %}
+		{% for field in form.visible_fields %}
+		<p>
+			{{ field.errors }}
+			{{ field.help_text}}
+			{{ field }}
+		</p>
+		{% endfor %}
+		<input type="submit" name="submit" value="Sửa"/>
+	</form>
+{% endblock %}

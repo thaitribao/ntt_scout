@@ -1,0 +1,25 @@
+{% extends 'public_site/base.html' %}
+{% load staticfiles %}
+{% block title %}Albums{% endblock %}
+{% block header_block %}Hình ảnh{% endblock %}
+{% block sub_header_block %}{% endblock %}
+{% block body_block %}
+	<div class="panel panel-default">
+		{% if is_admin %}
+		<div class="panel-heading"><a href="{% url 'Public:add_album' %}">Thêm album ảnh</a></div>
+		{% endif %}
+		{% if albums %}
+		<table class="table table-striped">
+			{% for album in albums %}
+				<tr>
+					<td><a href="{{album.link}}">{{album.name}}</a></td>
+					<td>{{album.date_taken}}</td>
+					<td><a href="{% url 'Public:edit_album' album_slug=album.slug %}">Sửa</a></td>
+				</tr>
+			{% endfor %}
+		</table>
+		{% else %}
+			No album existed
+		{% endif %}
+	</div>
+{% endblock %}
